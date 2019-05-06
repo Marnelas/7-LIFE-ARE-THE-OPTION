@@ -1,3 +1,3 @@
 window.onload = function() {
-  baseGame.init("nivel1");
+  baseGame.init("nivel");
 };

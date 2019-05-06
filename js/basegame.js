@@ -28,14 +28,16 @@ let baseGame = {
 
     this.interval = setInterval(() => {
       this.clear();
+      this.player.gravity();
       this.drawAll();
     }, 1000 / this.fps);
   },
   reset: function() {
     this.player = new Player(this.ctx, this.winW, this.winH, this.keys);
+    this.background = new Background(this.winW, this.winH, this.ctx);
   },
   drawAll: function() {
-    // this.background.draw();
+    this.background.draw();
     this.player.draw();
   },
   clear: function() {

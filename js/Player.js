@@ -18,11 +18,34 @@ class Player {
   }
 
   draw() {
+    if (this.y <= 0 || this.y > this.canvasH - 100) this.changeY();
+    if (this.x <= 0 || this.x > this.canvasW - 100) this.changeX();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   }
-  jump() {
-    this.y -= this.vy;
+  changeY() {
+    this.vy *= -1;
   }
+
+  changeX() {
+    this.vx *= -1;
+  }
+  jump() {
+    this.y -= 5;
+    this.vy -= 10;
+  }
+  gravity() {
+    let gravity = 0.4;
+
+    // solo salta cuando el personaje está en el suelo
+    if (this.y >= this.y0) {
+      this.vy = 1;
+      this.y = this.y0;
+    } else {
+      this.vy += gravity;
+      this.y += this.vy;
+    }
+  }
+
   moveLeft() {
     if (this.x > 0) this.x -= this.vx;
   }

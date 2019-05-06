@@ -38,7 +38,7 @@ class Player {
 
     // solo salta cuando el personaje está en el suelo
     if (this.y >= this.y0) {
-      this.vy = 1;
+      this.vy = 2;
       this.y = this.y0;
     } else {
       this.vy += gravity;

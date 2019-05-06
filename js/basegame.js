@@ -35,9 +35,11 @@ let baseGame = {
   reset: function() {
     this.player = new Player(this.ctx, this.winW, this.winH, this.keys);
     this.background = new Background(this.winW, this.winH, this.ctx);
+    this.obstacle = new Obstacle(this.ctx, this.winW, this.winH);
   },
   drawAll: function() {
     this.background.draw();
+    this.obstacle.draw();
     this.player.draw();
   },
   clear: function() {
@@ -49,5 +51,12 @@ let baseGame = {
       if (e.keyCode === 39) this.player.moveRight();
       if (e.keyCode === 38) this.player.jump();
     };
+  },
+  colission: function() {
+    // Si(x1 > x2 + w2) ==> No hay colisión
+    // Si(x1 + w1 < x2) ==> No hay colisión
+    // Si(y1 > y2 + h2) ==> No hay colisión
+    // Si(y1 + h1 < y2) ==> No hay colisión
+    // En otro caso ==> Hay colisión
   }
 };

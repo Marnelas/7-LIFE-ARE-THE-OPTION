@@ -24,11 +24,13 @@ let baseGame = {
   },
   start: function() {
     this.fps = 60;
+    alert("A jump is a life you decide");
 
     this.reset();
 
     this.interval = setInterval(() => {
       this.clear();
+      if (this.player.contador == 7) this.gameOver();
       this.player.gravity();
       this.drawAll();
       this.colission();
@@ -60,18 +62,25 @@ let baseGame = {
       if (e.keyCode === 38) this.player.jump();
     };
   },
+  stop: function() {
+    clearInterval(this.interval);
+  },
+  gameOver: function() {
+    this.stop();
+    alert("Game is over for you");
+  },
   colission: function() {
     if (
       this.player.x <= this.obstacle.posX + this.obstacle.width - 25 &&
       this.player.x + this.player.w - 50 >= this.obstacle.posX &&
-      this.player.y <= this.obstacle.posY + this.obstacle.height &&
+      this.player.y <= this.obstacle.posY + this.obstacle.height - 15 &&
       this.player.y + this.player.h >= this.obstacle.posY
     ) {
       this.player.positionF = this.obstacle.posY - this.player.h;
       this.player.floor = true;
+      console.log("entra");
     } else {
       this.player.floor = false;
-      // this.player.unblockX();
     }
   }
 };

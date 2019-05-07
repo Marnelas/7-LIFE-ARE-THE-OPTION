@@ -5,7 +5,6 @@ class Player {
     this.ctx = ctx;
     this.keys = keys;
     this.x = this.canvasW * 0.08;
-
     this.y0 = this.canvasH * 0.8;
     this.y = this.y0;
 
@@ -17,6 +16,7 @@ class Player {
     this.vx = 20;
     this.floor = false;
     this.positionF = undefined;
+    this.contador = 0;
   }
 
   draw() {
@@ -45,6 +45,7 @@ class Player {
     this.y -= 5;
     this.vy -= 10;
     this.floor = false;
+    this.contador++;
   }
   gravity() {
     let gravity = 0.4;

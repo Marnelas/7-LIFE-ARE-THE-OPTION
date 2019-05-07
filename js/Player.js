@@ -14,7 +14,7 @@ class Player {
     this.w = 100;
     this.h = 100;
     this.vy = 1;
-    this.vx = 10;
+    this.vx = 20;
   }
 
   draw() {
@@ -36,7 +36,6 @@ class Player {
   gravity() {
     let gravity = 0.4;
 
-    // solo salta cuando el personaje está en el suelo
     if (this.y >= this.y0) {
       this.vy = 2;
       this.y = this.y0;

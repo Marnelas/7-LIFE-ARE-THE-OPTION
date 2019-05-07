@@ -11,6 +11,7 @@ let baseGame = {
     this.setHandlers();
     this.start();
     this.setEventListeners();
+    this.colission();
   },
   setDimensions: function() {
     this.canvas.setAttribute("width", window.innerWidth);
@@ -30,6 +31,7 @@ let baseGame = {
       this.clear();
       this.player.gravity();
       this.drawAll();
+      this.colission();
     }, 1000 / this.fps);
   },
   reset: function() {
@@ -53,19 +55,12 @@ let baseGame = {
     };
   },
   colission: function() {
-    // Si(x1 > x2 + w2) ==> No hay colisión
-    // Si(x1 + w1 < x2) ==> No hay colisión
-    // Si(y1 > y2 + h2) ==> No hay colisión
-    // Si(y1 + h1 < y2) ==> No hay colisión
-    // En otro caso ==> Hay colisión
-
     if (
-      this.player.x > this.obstacle.posX + this.obstacle.width &&
-      this.player.x + this.player.w < this.obstacle.posX &&
-      this.player.y > this.obstacle.posY + this.obstacle.height &&
-      this.player.y + this.player.h < this.obstacle.posY
+      this.player.x <= this.obstacle.posX + this.obstacle.width - 25 &&
+      this.player.x + this.player.w - 50 >= this.obstacle.posX &&
+      this.player.y <= this.obstacle.posY + this.obstacle.height - 50 &&
+      this.player.y + this.player.h >= this.obstacle.posY + 50
     ) {
-      alert("pp");
     }
   }
 };

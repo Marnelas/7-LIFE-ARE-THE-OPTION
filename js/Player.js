@@ -15,6 +15,8 @@ class Player {
     this.h = 100;
     this.vy = 1;
     this.vx = 20;
+    this.floor = false;
+    this.positionF = undefined;
   }
 
   draw() {
@@ -22,16 +24,27 @@ class Player {
     if (this.x <= 0 || this.x > this.canvasW - 100) this.changeX();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   }
+
   changeY() {
     this.vy *= -1;
   }
+  blockY() {
+    this.vy = 0;
+  }
 
+  blockX() {
+    this.vx = 0;
+  }
+  unblockX() {
+    this.vx = 20;
+  }
   changeX() {
     this.vx *= -1;
   }
   jump() {
     this.y -= 5;
     this.vy -= 10;
+    this.floor = false;
   }
   gravity() {
     let gravity = 0.4;
@@ -39,6 +52,9 @@ class Player {
     if (this.y >= this.y0) {
       this.vy = 2;
       this.y = this.y0;
+    } else if (this.floor) {
+      this.vy = 0;
+      this.y = this.positionF;
     } else {
       this.vy += gravity;
       this.y += this.vy;

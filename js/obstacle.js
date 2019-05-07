@@ -1,10 +1,10 @@
 class Obstacle {
-  constructor(ctx, w, h) {
+  constructor(ctx, w, h, posX, posY) {
     this.ctx = ctx;
     this.canW = w;
     this.canH = h;
-    this.posX = 400;
-    this.posY = 500;
+    this.posX = posX;
+    this.posY = posY;
     this.width = 100;
     this.height = 100;
   }

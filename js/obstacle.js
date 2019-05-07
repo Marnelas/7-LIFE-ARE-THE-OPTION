@@ -5,6 +5,8 @@ class Obstacle {
     this.canH = h;
     this.posX = 400;
     this.posY = 500;
+    this.width = 100;
+    this.height = 100;
   }
   draw() {
     this.ctx.fillStyle = "blue"; // cambia los colores de relleno

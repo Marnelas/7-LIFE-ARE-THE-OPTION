@@ -58,5 +58,14 @@ let baseGame = {
     // Si(y1 > y2 + h2) ==> No hay colisión
     // Si(y1 + h1 < y2) ==> No hay colisión
     // En otro caso ==> Hay colisión
+
+    if (
+      this.player.x > this.obstacle.posX + this.obstacle.width &&
+      this.player.x + this.player.w < this.obstacle.posX &&
+      this.player.y > this.obstacle.posY + this.obstacle.height &&
+      this.player.y + this.player.h < this.obstacle.posY
+    ) {
+      alert("pp");
+    }
   }
 };

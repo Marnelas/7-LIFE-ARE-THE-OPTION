@@ -39,17 +39,22 @@ let baseGame = {
   reset: function() {
     this.player = new Player(this.ctx, this.winW, this.winH, this.keys);
     this.background = new Background(this.winW, this.winH, this.ctx);
-    this.obstacle = new Obstacle(this.ctx, this.winW, this.winH, 400, 450);
-    this.obstacle2 = new Obstacle(this.ctx, this.winW, this.winH, 600, 550);
+    this.obstacles = [];
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 200, 550));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 400, 450));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 600, 350));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 800, 250));
+
     this.framesCounter = 0;
   },
   createObstacle(obs) {
-    this.obstacle.push(obs);
+    this.obstacles.push(obs);
   },
   drawAll: function() {
     this.background.draw();
-    this.obstacle.draw();
-    this.obstacle2.draw();
+    this.obstacles.forEach(function(obstacle) {
+      obstacle.draw();
+    });
     this.player.draw(this.framesCounter);
   },
   clear: function() {
@@ -70,17 +75,39 @@ let baseGame = {
     alert("Game is over for you");
   },
   colission: function() {
-    if (
-      this.player.x <= this.obstacle.posX + this.obstacle.width - 25 &&
-      this.player.x + this.player.w - 50 >= this.obstacle.posX &&
-      this.player.y <= this.obstacle.posY + this.obstacle.height - 15 &&
-      this.player.y + this.player.h >= this.obstacle.posY
-    ) {
-      this.player.positionF = this.obstacle.posY - this.player.h;
-      this.player.floor = true;
-      console.log("entra");
+    // if (
+    //
+    // ) {
+    // this.player.positionF = this.obstacle.posY - this.player.h;
+    // this.player.floor = true;
+    //   console.log("entra");
+    // } else {
+    //   this.player.floor = false;
+    // }
+    let index = this.obstacles.findIndex(obstacle => {
+      return (
+        this.player.x <= obstacle.posX + obstacle.width - 25 &&
+        this.player.x + this.player.w - 50 >= obstacle.posX &&
+        this.player.y <= obstacle.posY + obstacle.height - 15 &&
+        this.player.y + this.player.h >= obstacle.posY
+      );
+    });
+    if (index != -1) {
+      this.winCondition(index);
+      this.colissionAction(index);
     } else {
       this.player.floor = false;
+    }
+  },
+  colissionAction: function(obs) {
+    this.player.positionF = this.obstacles[obs].posY - this.player.h;
+    this.player.floor = true;
+    console.log("entra");
+  },
+  winCondition: function(index) {
+    if (index == 3) {
+      this.stop();
+      alert("has ganadoooooo!!!!!!!!!!!!!!");
     }
   }
 };

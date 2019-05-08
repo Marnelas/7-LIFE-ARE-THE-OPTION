@@ -17,7 +17,9 @@ let baseGame = {
     this.canvas.setAttribute("width", window.innerWidth);
     this.canvas.setAttribute("height", window.innerHeight);
     this.winH = window.innerHeight;
-    this.winW = window.innerWidth;
+    this.winW = window.innerWidth; 
+    this.reset();
+
   },
   setHandlers: function() {
     window.onresize = () => this.setDimensions();
@@ -29,7 +31,7 @@ let baseGame = {
 
     this.interval = setInterval(() => {
       this.clear();
-      if (this.player.contador == 8) this.gameOver();
+      if (this.player.contador == 15) this.gameOver();
       this.player.gravity();
       this.drawAll();
       this.colission();
@@ -46,6 +48,14 @@ let baseGame = {
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 800, 250));
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1000, 150));
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1200, 150));
+ 
+ 
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 600, 450))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 400, 550))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 300, 600))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 50))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 20))
     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1200, 550))
     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 200, 250))
     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1000, 450))
@@ -84,9 +94,10 @@ let baseGame = {
   },
   setEventListeners: function() {
     document.onkeydown = e => {
+
       if (e.keyCode === 37) this.player.moveLeft();
       if (e.keyCode === 39) this.player.moveRight();
-      if (e.keyCode === 38) this.player.jump();
+      if (e.keyCode === 32) this.player.jump();
     };
   },
   stop: function() {
@@ -97,24 +108,16 @@ let baseGame = {
     alert("Game is over for you");
   },
   colission: function() {
-    // if (
-    //
-    // ) {
-    // this.player.positionF = this.obstacle.posY - this.player.h;
-    // this.player.floor = true;
-    //   console.log("entra");
-    // } else {
-    //   this.player.floor = false;
-    // }
     let index = this.obstacles.findIndex(obstacle => {
       return (
-        this.player.x <= obstacle.posX + obstacle.width - 25 &&
-        this.player.x + this.player.w - 50 >= obstacle.posX &&
-        this.player.y <= obstacle.posY + obstacle.height - 15 &&
+           this.player.x <= obstacle.posX + obstacle.width - 25 &&
+           this.player.x + this.player.w - 50 >= obstacle.posX &&
+          this.player.y <= obstacle.posY - 30 &&  
         this.player.y + this.player.h >= obstacle.posY
       );
     });
     if (index != -1) {
+
       this.winCondition(index);
       this.colissionAction(index);
     } else {
@@ -135,6 +138,7 @@ let baseGame = {
     this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
     console.log("entra");
+    
   },
   goBack: function() {
     this.player.x = this.winW * 0.08

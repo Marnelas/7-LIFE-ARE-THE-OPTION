@@ -3,7 +3,7 @@ class Background {
   constructor(w, h, ctx) {
     this.ctx = ctx;
     this.img = new Image();
-    this.img.src = "img/background.jpg";
+    this.img.src = "img/background-final.jpg";
     this.h = h;
     this.w = w;
 

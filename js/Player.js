@@ -17,6 +17,7 @@ class Player {
     this.floor = false;
     this.positionF = undefined;
     this.contador = 0;
+    this.effect = undefined;
   }
 
   draw() {
@@ -42,6 +43,7 @@ class Player {
     this.vx *= -1;
   }
   jump() {
+    this.soundJump()
     this.y -= 5;
     this.vy -= 10;
     this.floor = false;
@@ -68,5 +70,10 @@ class Player {
 
   moveRight() {
     if (this.x < this.canvasW - this.w) this.x += this.vx;
+  }
+  soundJump() {
+    this.effect = new Audio()
+    this.effect.src = "songs/Salto.wav"
+    this.effect.play()
   }
 }

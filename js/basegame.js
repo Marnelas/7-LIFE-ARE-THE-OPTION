@@ -2,7 +2,9 @@ let baseGame = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
+sound: undefined,
   winH: undefined,
+  counter:0,
   winW: undefined,
   init: function(Id) {
     this.canvas = document.getElementById(Id);
@@ -104,6 +106,7 @@ let baseGame = {
     clearInterval(this.interval);
   },
   gameOver: function() {
+    this.gameOverSound()
     this.stop();
     alert("Game is over for you");
   },
@@ -117,6 +120,7 @@ let baseGame = {
       );
     });
     if (index != -1) {
+
 
       this.winCondition(index);
       this.colissionAction(index);
@@ -138,11 +142,37 @@ let baseGame = {
     this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
     console.log("entra");
+    if (i == 3 && this.counter==0) {
+    this.endComming()
+    this.counter++
+  
+    }
     
   },
   goBack: function() {
+ /*colissionSound: undefined,
+  gameOverSound:undefined,
+  endComming:undefined,*/
+  this.colissionSound()
     this.player.x = this.winW * 0.08
     this.player.y = this.player.y0;
+  },
+  colissionSound: function(){
+    this.player.contador = 0
+    this.sound = new Audio();
+    this.sound.src = "songs/desvanecido.wav"
+    this.sound.play()
+  },
+  gameOverSound:function(){
+    this.sound = new Audio();
+    this.sound.src = "songs/explotido.wav"
+    this.sound.play()
+  },
+  endComming:function(){
+    this.sound = new Audio();
+    this.sound.src = "songs/Llegando-fin.wav"
+    this.sound.play()
+
   },
 
   winCondition: function(index) {

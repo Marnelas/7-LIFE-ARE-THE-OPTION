@@ -1,4 +1,23 @@
-.h2 {
-  color: rgb(124, 2, 2);
+h2 {
+  color: rgb(241, 150, 150);
   
+}
+h1{
+  color: yellow
+}
+body {
+  text-align: center;
+  background-image: url(../img/background-final.jpg);
+  background-size: cover;
+  color: green
+}
+a { 
+  text-decoration: none;
+  color: aquamarine;
+  padding:1em;
+  background: rgb(114, 6, 124)
+}
+li{
+    padding: 2em;
+
 }

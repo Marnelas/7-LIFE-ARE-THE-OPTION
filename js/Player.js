@@ -20,7 +20,7 @@ class Player {
   }
 
   draw() {
-    if (this.y <= 0 || this.y > this.canvasH - 100) this.changeY();
+     if (this.y <= - 100 || this.y > this.canvasH - 100) this.changeY();
     if (this.x <= 0 || this.x > this.canvasW - 100) this.changeX();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   }

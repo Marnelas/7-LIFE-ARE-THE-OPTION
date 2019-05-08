@@ -24,13 +24,12 @@ let baseGame = {
   },
   start: function() {
     this.fps = 60;
-    alert("A jump is a life you decide");
 
     this.reset();
 
     this.interval = setInterval(() => {
       this.clear();
-      if (this.player.contador == 7) this.gameOver();
+      if (this.player.contador == 8) this.gameOver();
       this.player.gravity();
       this.drawAll();
       this.colission();
@@ -40,20 +39,43 @@ let baseGame = {
     this.player = new Player(this.ctx, this.winW, this.winH, this.keys);
     this.background = new Background(this.winW, this.winH, this.ctx);
     this.obstacles = [];
+    this.traps = [];
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 200, 550));
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 400, 450));
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 600, 350));
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 800, 250));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1000, 150));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1200, 150));
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1200, 550))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 200, 250))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1000, 450))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1200, 350))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1100, 250))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 900, 300))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 450))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 500))
+
+
+
+
+
 
     this.framesCounter = 0;
   },
-  createObstacle(obs) {
+  createTrap: function(trap){
+    this.traps.push(trap);
+
+  },
+  createObstacle: function(obs) {
     this.obstacles.push(obs);
   },
   drawAll: function() {
     this.background.draw();
-    this.obstacles.forEach(function(obstacle) {
+    this.obstacles.forEach(obstacle => {
       obstacle.draw();
+    });
+    this.traps.forEach(trap => {
+      trap.draw()
     });
     this.player.draw(this.framesCounter);
   },
@@ -98,14 +120,29 @@ let baseGame = {
     } else {
       this.player.floor = false;
     }
+    let condition = this.traps.some(trap => {
+      return (
+        this.player.x <= trap.posX + trap.width - 25 &&
+        this.player.x + this.player.w - 50 >= trap.posX &&
+        this.player.y <= trap.posY + trap.height - 15 &&
+        this.player.y + this.player.h >= trap.posY
+      );
+    });
+    if(condition)this.goBack()
+  
   },
-  colissionAction: function(obs) {
-    this.player.positionF = this.obstacles[obs].posY - this.player.h;
+  colissionAction: function(i) {
+    this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
     console.log("entra");
   },
+  goBack: function() {
+    this.player.x = this.winW * 0.08
+    this.player.y = this.player.y0;
+  },
+
   winCondition: function(index) {
-    if (index == 3) {
+    if (index == 5) {
       this.stop();
       alert("has ganadoooooo!!!!!!!!!!!!!!");
     }

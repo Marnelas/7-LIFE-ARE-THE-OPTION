@@ -3,6 +3,7 @@ let basegame = {
   ctx: undefined,
   fps: 60,
 sound: undefined,
+winSound:undefined,
   winH: undefined,
   counter:0,
   winW: undefined,
@@ -183,6 +184,7 @@ sound: undefined,
   winCondition: function(index) {
     if (index == 5) {
       this.stop();
+      this.winPlay()
       let win = document.getElementById("winScreen")
       console.log(win)
       win.classList.remove("bloqueo")
@@ -193,5 +195,11 @@ sound: undefined,
       
     
     }
+  },
+  winPlay:function(){
+    this.winSound = new Audio()
+    this.winSound.src = "songs/winSong.mp3"
+    this.winSound.play()
   }
+  
 };

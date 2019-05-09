@@ -2,6 +2,7 @@ let basegame2 = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
+  index:undefined,
 sound: undefined,
   winH: undefined,
   counter:0,
@@ -45,15 +46,67 @@ sound: undefined,
     this.obstacles = [];
     this.traps = [];
     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 200, 550));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 300, 200));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 500, 350));
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 700, 150));
+     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 800, 150));
+ 
+     this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1200, 350));
+
     
  
  
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 100, 20))    
+     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 300, 350))  
+     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 300, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 300, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 300, 650))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 400, 650))        
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 650))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 500, 50))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 600, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 600, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 600, 650))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 250))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 350))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 700, 650)) 
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 250))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 350))    
     this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 800, 650))   
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 900, 350))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 900, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 900, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 900, 650))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1000, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1000, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1000, 650))
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1100, 450))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1100, 550))    
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1100, 650))    
+    
+    
+ 
+   
+
+    
+
+  
+
+
     
 
 
 
     this.framesCounter = 0;
+  },
+  ezmode: function(){
+    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1000, 350));
   },
   
   createTrap: function(trap){
@@ -78,10 +131,11 @@ sound: undefined,
   },
   setEventListeners: function() {
     document.onkeydown = e => {
-
+console.log(e.keyCode)
       if (e.keyCode === 37) this.player.moveLeft();
       if (e.keyCode === 39) this.player.moveRight();
       if (e.keyCode === 32) this.player.jump();
+      if (e.keyCode===13) this.ezmode();
     };
   },
   stop: function() {
@@ -125,6 +179,7 @@ sound: undefined,
   
   },
   colissionAction: function(i) {
+    console.log(i)
     this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
     console.log("entra");
@@ -162,8 +217,9 @@ sound: undefined,
   },
 
   winCondition: function(index) {
-    if (index == 5) {
+    if (index == 6) {
       this.stop();
+      this.winPlay()
       let win = document.getElementById("winScreen")
       console.log(win)
       win.classList.remove("bloqueo")
@@ -174,5 +230,10 @@ sound: undefined,
       
     
     }
+  },
+   winPlay: function () {
+    this.winSound = new Audio()
+    this.winSound.src = "songs/winSong.mp3"
+    this.winSound.play()
   }
 };

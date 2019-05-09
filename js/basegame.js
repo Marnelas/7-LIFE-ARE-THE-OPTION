@@ -109,7 +109,11 @@ sound: undefined,
   gameOver: function() {
     this.gameOverSound()
     this.stop();
-    alert("Game is over for you");
+    let lose = document.getElementById("loseScreen")
+
+    lose.classList.remove("bloqueo")
+    let canvas = document.getElementById("nivel")
+    canvas.className = "bloqueo"
   },
   colission: function() {
     let index = this.obstacles.findIndex(obstacle => {
@@ -179,7 +183,13 @@ sound: undefined,
   winCondition: function(index) {
     if (index == 5) {
       this.stop();
-      document.getElementById("winScreen")
+      let win = document.getElementById("winScreen")
+      console.log(win)
+      win.classList.remove("bloqueo")
+      let canvas = document.getElementById("nivel")
+      canvas.className = "bloqueo"
+
+
       
     
     }

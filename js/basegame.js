@@ -40,7 +40,7 @@ sound: undefined,
     }, 1000 / this.fps);
   },
   reset: function() {
-    this.player = new Player(this.ctx, this.winW, this.winH, this.keys);
+    this.player = new player(this.ctx, this.winW, this.winH, this.keys);
     this.background = new Background(this.winW, this.winH, this.ctx);
     this.obstacles = [];
     this.traps = [];

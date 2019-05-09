@@ -1,4 +1,4 @@
-class Player {
+class player {
   constructor(ctx, w, h, keys) {
     this.canvasW = w;
     this.canvasH = h;

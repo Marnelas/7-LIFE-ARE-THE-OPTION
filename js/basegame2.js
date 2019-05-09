@@ -137,7 +137,7 @@ console.log(e.keyCode)
       if (e.keyCode === 37) this.player.moveLeft();
       if (e.keyCode === 39) this.player.moveRight();
       if (e.keyCode === 32) this.player.jump();
-      if (e.keyCode===13) this.ezmode();
+      if (e.keyCode===40) this.ezmode();
     };
   },
   stop: function() {

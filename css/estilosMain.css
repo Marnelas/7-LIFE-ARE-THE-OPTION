@@ -7,15 +7,19 @@ h1{
 }
 body {
   text-align: center;
-  background-image: url(../img/background-final.jpg);
+  background-image: url(../img/winScreen.jpeg);
   background-size: cover;
-  color: green
+  color: rgb(0, 0, 0);
 }
 a { 
   text-decoration: none;
   color: aquamarine;
   padding:1em;
   background: rgb(114, 6, 124)
+}
+p{
+  background: rgba(243, 221, 221, 0.7);
+  display: inline-block
 }
 li{
     padding: 2em;

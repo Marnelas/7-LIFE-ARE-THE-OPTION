@@ -8,8 +8,11 @@ class player {
     this.y0 = this.canvasH * 0.8;
     this.y = this.y0;
 
+    
     this.img = new Image();
-    this.img.src = "img/player.png";
+    this.img.src = "img/sprite.png";
+    this.img.frames = 3;
+    this.img.frameIndex = 0;
     this.w = 100;
     this.h = 100;
     this.vy = 1;
@@ -19,13 +22,36 @@ class player {
     this.contador = 0;
     this.effect = undefined;
   }
+  draw(framesCounter) {
+    this.ctx.drawImage(
+      this.img,
+      this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
+      0,
+      Math.floor(this.img.width / this.img.frames),
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    );
 
-  draw() {
-     if (this.y <= - 100 || this.y > this.canvasH - 100) this.changeY();
-    if (this.x <= 0 || this.x > this.canvasW - 100) this.changeX();
-    this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+    this.animateImg(framesCounter);
   }
 
+  // draw() {
+  //    if (this.y <= - 100 || this.y > this.canvasH - 100) this.changeY();
+  //   if (this.x <= 0 || this.x > this.canvasW - 100) this.changeX();
+  //   this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+  // }
+    animateImg(framesCounter) {
+      // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
+      if (framesCounter % 10 === 0) {
+        this.img.frameIndex += 1;
+
+        // Si el frame es el último, se vuelve al primero
+        if (this.img.frameIndex > 2) this.img.frameIndex = 0;
+      }
+    }
   changeY() {
     this.vy *= -1;
   }

@@ -34,6 +34,7 @@ winSound:undefined,
     this.reset();
 
     this.interval = setInterval(() => {
+      this.framesCounter++
       this.clear();
       if (this.player.contador == 15) this.gameOver();
       this.player.gravity();
@@ -93,7 +94,7 @@ winSound:undefined,
       trap.draw()
     });
     this.player.draw(this.framesCounter);
-  },
+    },
   clear: function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },

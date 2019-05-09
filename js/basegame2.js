@@ -34,6 +34,7 @@ sound: undefined,
     this.reset();
 
     this.interval = setInterval(() => {
+      this.framesCounter++
       this.clear();
       if (this.player.contador == 15) this.gameOver();
       this.player.gravity();
@@ -185,7 +186,9 @@ console.log(e.keyCode)
   
   },
   colissionAction: function(i) {
-    console.log(i)
+    
+
+    
     this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
     console.log("entra");
@@ -223,7 +226,7 @@ console.log(e.keyCode)
   },
 
   winCondition: function(index) {
-    if (index == 6) {
+    if (index == 5) {
       this.stop();
       this.winPlay()
       let win = document.getElementById("winScreen")

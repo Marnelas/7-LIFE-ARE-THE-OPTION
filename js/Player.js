@@ -11,7 +11,7 @@ class player {
     
     this.img = new Image();
     this.img.src = "img/sprite.png";
-    this.img.frames = 3;
+    this.img.frames = 8;
     this.img.frameIndex = 0;
     this.w = 100;
     this.h = 100;
@@ -45,11 +45,11 @@ class player {
   // }
     animateImg(framesCounter) {
       // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
-      if (framesCounter % 10 === 0) {
+      if (framesCounter % 9 === 0) {
         this.img.frameIndex += 1;
 
         // Si el frame es el último, se vuelve al primero
-        if (this.img.frameIndex > 2) this.img.frameIndex = 0;
+        if (this.img.frameIndex > 7) this.img.frameIndex = 0;
       }
     }
   changeY() {

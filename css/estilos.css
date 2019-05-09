@@ -3,7 +3,17 @@
   margin: 0;
   margin-bottom: 0; 
 }
-#winScreen #loseScreen{
+#loseScreen {
+  padding: 25em;
+  text-transform: uppercase;
+  color: yellow;
+  text-emphasis: initial;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../img/Lose-Screen.png");
+}
+#winScreen{
   padding: 24em;
   text-transform: uppercase;
   color: yellow;

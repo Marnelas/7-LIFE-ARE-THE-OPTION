@@ -1,4 +1,4 @@
-let baseGame = {
+let basegame = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
@@ -74,6 +74,7 @@ sound: undefined,
 
     this.framesCounter = 0;
   },
+  
   createTrap: function(trap){
     this.traps.push(trap);
 
@@ -178,7 +179,9 @@ sound: undefined,
   winCondition: function(index) {
     if (index == 5) {
       this.stop();
-      alert("has ganadoooooo!!!!!!!!!!!!!!");
+      document.getElementById("winScreen")
+      
+    
     }
   }
 };

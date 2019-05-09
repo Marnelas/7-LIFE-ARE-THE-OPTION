@@ -21,3 +21,6 @@ li{
     padding: 2em;
 
 }
+#winScreen {
+  display: none;
+}

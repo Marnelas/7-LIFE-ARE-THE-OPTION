@@ -3,6 +3,7 @@ let basegame = {
   ctx: undefined,
   fps: 60,
 sound: undefined,
+counterSong:0,
 winSound:undefined,
   winH: undefined,
   counter:0,
@@ -126,7 +127,12 @@ winSound:undefined,
       );
     });
     if (index != -1) {
+      if (index == 0 && this.counterSong == 0) {
 
+
+        this.background.Sound()
+        this.counterSong++
+      }
 
       this.winCondition(index);
       this.colissionAction(index);

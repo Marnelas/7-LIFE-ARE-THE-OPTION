@@ -4,6 +4,7 @@ let basegame2 = {
   fps: 60,
   index:undefined,
 sound: undefined,
+  counterSong: 0,
   winH: undefined,
   counter:0,
   winW: undefined,
@@ -160,7 +161,12 @@ console.log(e.keyCode)
       );
     });
     if (index != -1) {
+      if (index == 0 && this.counterSong == 0) {
 
+
+        this.background.Sound()
+        this.counterSong++
+      }
 
       this.winCondition(index);
       this.colissionAction(index);

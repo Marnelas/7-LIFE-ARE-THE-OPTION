@@ -4,7 +4,9 @@ let basegame2 = {
   fps: 60,
   index:undefined,
 sound: undefined,
+counterpos:0,
   counterSong: 0,
+  booleanoHard: false,
   winH: undefined,
   counter:0,
   winW: undefined,
@@ -108,7 +110,19 @@ sound: undefined,
     this.framesCounter = 0;
   },
   ezmode: function(){
-    this.createObstacle(new Obstacle(this.ctx, this.winW, this.winH, 1000, 350));
+    if(this.booleanoHard){
+    this.booleanoHard = false;
+    this.ctx.clearRect(1100, 250, 100, 100,);
+    this.traps.pop();
+
+    }
+  },
+  hardMode: function(){
+  if (this.counterpos == 0){
+    this.createTrap(new Obstacle(this.ctx, this.winW, this.winH, 1100, 250));
+  this.booleanoHard = true;
+this.counterpos++
+  }
   },
   
   createTrap: function(trap){
@@ -133,7 +147,7 @@ sound: undefined,
   },
   setEventListeners: function() {
     document.onkeydown = e => {
-console.log(e.keyCode)
+
       if (e.keyCode === 37) this.player.moveLeft();
       if (e.keyCode === 39) this.player.moveRight();
       if (e.keyCode === 32) this.player.jump();
@@ -162,6 +176,7 @@ console.log(e.keyCode)
       );
     });
     if (index != -1) {
+      if(index == 4)this.hardMode()
       if (index == 0 && this.counterSong == 0) {
 
 
@@ -191,8 +206,7 @@ console.log(e.keyCode)
     
     this.player.positionF = this.obstacles[i].posY - this.player.h;
     this.player.floor = true;
-    console.log("entra");
-    if (i == 3 && this.counter==0) {
+    if (i == 4 && this.counter==0) {
     this.endComming()
     this.counter++
   
@@ -200,9 +214,7 @@ console.log(e.keyCode)
     
   },
   goBack: function() {
- /*colissionSound: undefined,
-  gameOverSound:undefined,
-  endComming:undefined,*/
+ 
   this.colissionSound()
     this.player.x = this.winW * 0.08
     this.player.y = this.player.y0;
@@ -230,7 +242,6 @@ console.log(e.keyCode)
       this.stop();
       this.winPlay()
       let win = document.getElementById("winScreen")
-      console.log(win)
       win.classList.remove("bloqueo")
       let canvas = document.getElementById("nivel")
       canvas.className = "bloqueo"

@@ -3,6 +3,11 @@
   margin: 0;
   margin-bottom: 0; 
 }
+h1, p {
+  background: rgba(243, 221, 221, 0.7);
+  display: inline-block;
+    color: rgb(0, 0, 0);
+}
 #loseScreen {
   padding: 25em;
   text-transform: uppercase;
@@ -30,7 +35,7 @@ canvas{
 }
 
 a {
-  color: yellow;
+  color: black;
   text-emphasis: initial;
   text-decoration: none
 }
